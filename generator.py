@@ -4,7 +4,7 @@ from tabulate import tabulate
 
 fake = Faker()
 
-# Generate a thousand random searches
+# Generate random search history data
 searches = []
 for _ in range(15000):
     ip_address = fake.ipv4()
