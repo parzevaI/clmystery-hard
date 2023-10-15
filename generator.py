@@ -1,20 +1,22 @@
 from faker import Faker
 from tabulate import tabulate
+import random as rm
 
 
 fake = Faker()
 
 # Generate random search history data
-searches = []
-for _ in range(15000):
-    ip_address = fake.ipv4()
-    site_url = fake.url()
-    access_time = fake.date_time_this_decade()
+ip_addresses = [fake.ipv4() for _ in range(200)]
+urls = [fake.url() for _ in range(200)]
 
-    searches.append((ip_address, site_url, access_time))
+# List it
+searches = [(
+    rm.choice(ip_addresses),
+    rm.choice(urls),
+    fake.date_time_this_year(),
+) for _ in range(13000)]
 
-
+# Put output in file
 file = open('searches', 'a')
 file.write(tabulate(sorted(searches, key=lambda x: x[2])))
 file.close()
-
